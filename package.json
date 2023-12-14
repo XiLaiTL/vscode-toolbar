@@ -1,14 +1,15 @@
 {
-  "name": "toolbar",
+  "name": "vscode-toolbar",
   "displayName": "%toolbar.displayName%",
   "description": "%toolbar.description%",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "XiLaiTL",
   "author": {
     "name": "XiLaiTL",
     "url": "https://github.com/XiLaiTL"
   },
   "license":"MIT",
+  "icon": "icon.png",
   "homepage": "https://github.com/XiLaiTL/vscode-toolbar",
   "bugs": {
     "url": "https://github.com/XiLaiTL/vscode-toolbar/issues"
