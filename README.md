@@ -6,7 +6,7 @@
 
 ![icon](./icon.png)
 
-<details> <summary> 目录 </summary>
+<details> <summary> Catalog </summary>
 
 - [toolbar README](#toolbar-readme)
   - [Features](#features)
