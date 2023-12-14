@@ -1,0 +1,839 @@
+{
+  "name": "toolbar",
+  "displayName": "%toolbar.displayName%",
+  "description": "%toolbar.description%",
+  "version": "1.0.0",
+  "publisher": "XiLaiTL",
+  "author": {
+    "name": "XiLaiTL",
+    "url": "https://github.com/XiLaiTL"
+  },
+  "license":"MIT",
+  "homepage": "https://github.com/XiLaiTL/vscode-toolbar",
+  "bugs": {
+    "url": "https://github.com/XiLaiTL/vscode-toolbar/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XiLaiTL/vscode-toolbar.git"
+  },
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "l10n": "./locales",
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "button",
+    "toolbar",
+    "tool",
+    "toolbox",
+    "custom",
+    "工具",
+    "工具箱",
+    "工具栏"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onLanguage:markdown"
+  ],
+  "main": "./dist/extension-node",
+	"browser": "./dist/extension-web",
+  "contributes": {
+    "commands": [
+      {
+        "command": "toolbar.toggle",
+        "title": "Toggle Toolbar Button",
+        "icon": "$(wrench)",
+        "enablement": "editorLangId in ext.panelLanguages || editorLangId in ext.hoverLanguages"
+      },
+      {
+        "command": "toolbar.openPanel",
+        "title": "Open Toolbar",
+        "icon": "$(tools)",
+        "enablement": "editorLangId in ext.panelLanguages"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "editorLangId in ext.panelLanguages",
+          "command": "toolbar.openPanel",
+          "group": "navigation"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "toolbar",
+          "title": "Toolbar",
+          "icon": "$(tools)"
+        }
+      ]
+    },
+    "views": {
+      "toolbar": [
+        {
+          "id": "toolbar.markdown-toolbar",
+          "name": "Markdown Toolbar",
+          "type": "webview",
+          "contextualTitle": "Markdown Toolbar",
+          "icon": "$(markdown)"
+        },
+        {
+          "id": "toolbar.mercury-toolbar",
+          "name": "Mercury Toolbar",
+          "type": "webview",
+          "contextualTitle": "Mercury Toolbar",
+          "visibility": "hidden",
+          "icon": "$(briefcase)"
+        },
+        {
+          "id": "toolbar.venus-toolbar",
+          "name": "Venus Toolbar",
+          "type": "webview",
+          "contextualTitle": "Venus Toolbar",
+          "visibility": "hidden",
+          "icon": "$(heart)"
+        },
+        {
+          "id": "toolbar.terra-toolbar",
+          "name": "Terra Toolbar",
+          "type": "webview",
+          "contextualTitle": "Terra Toolbar",
+          "visibility": "hidden",
+          "icon": "$(smiley)"
+        },
+        {
+          "id": "toolbar.mars-toolbar",
+          "name": "Mars Toolbar",
+          "type": "webview",
+          "contextualTitle": "Mars Toolbar",
+          "visibility": "hidden",
+          "icon": "$(flame)"
+        },
+        {
+          "id": "toolbar.jupiter-toolbar",
+          "name": "Jupiter Toolbar",
+          "type": "webview",
+          "contextualTitle": "Jupiter Toolbar",
+          "visibility": "hidden",
+          "icon": "$(coffee)"
+        },
+        {
+          "id": "toolbar.saturn-toolbar",
+          "name": "Saturn Toolbar",
+          "type": "webview",
+          "contextualTitle": "Saturn Toolbar",
+          "visibility": "hidden",
+          "icon": "$(circuit-board)"
+        },
+        {
+          "id": "toolbar.uranus-toolbar",
+          "name": "Uranus Toolbar",
+          "type": "webview",
+          "contextualTitle": "Uranus Toolbar",
+          "visibility": "hidden",
+          "icon": "$(game)"
+        },
+        {
+          "id": "toolbar.neptune-toolbar",
+          "name": "Neptune Toolbar",
+          "type": "webview",
+          "contextualTitle": "Neptune Toolbar",
+          "visibility": "hidden",
+          "icon": "$(gift)"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Toolbar",
+      "properties": {
+        "toolbar.builtin.markdown.activate":{
+          "type": "boolean",
+          "markdownDescription": "%toolbar.builtin.markdown.activate.markdownDescription%",
+          "default": true
+        },
+        "toolbar.builtin.markdown.unorderListStyle":{
+          "type":"string",
+          "markdownDescription": "%toolbar.builtin.markdown.unorderListStyle.markdownDescription%",
+          "enum": ["-","+","*"],
+          "default":"+"
+        },
+        "toolbar.builtin.markdown.orderListStyle":{
+          "type":"string",
+          "markdownDescription": "%toolbar.builtin.markdown.orderListStyle.markdownDescription%",
+          "enum": ["1)","1."],
+          "default":"1."
+        },
+        "toolbar.panel.languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "%toolbar.panel.languages.markdownDescription%",
+          "default": [
+            "markdown"
+          ]
+        },
+        "toolbar.hover.languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "%toolbar.hover.languages.markdownDescription%",
+          "default": [
+            "markdown"
+          ]
+        },
+        "toolbar.actions": {
+          "type": "array",
+          "markdownDescription": "%toolbar.actions.markdownDescription%",
+          "items": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "%toolbar.action.name.description%"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "argument": {
+                        "description": "%toolbar.action.replace.argument.description%",
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "start": {
+                                "type": "string",
+                                "description": "%toolbar.action.argument.start.description%"
+                              },
+                              "self": {
+                                "description": "%toolbar.action.argument.self.description%",
+                                "anyOf":[
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "regex": {
+                                        "type": "string",
+                                        "description": "%toolbar.action.argument.regex.description%"
+                                      },
+                                      "with": {
+                                        "type": "string",
+                                        "description": "%toolbar.action.argument.with.description%"
+                                      }
+                                    },
+                                    "required": [
+                                      "regex",
+                                      "with"
+                                    ]
+                                  },
+                                  {
+                                    "type":"string",
+                                    "description": "%toolbar.action.replace.string.description%"
+                                  }
+                                ]
+                              },
+                              "end": {
+                                "type": "string",
+                                "description": "%toolbar.action.argument.end.description%"
+                              }
+                            }
+                          },
+                          {
+                            "type": "string",
+                            "description": "%toolbar.action.replace.string.description%"
+                          }
+                        ]
+                      },
+                      "mode": {
+                        "type": "string",
+                        "description": "%toolbar.action.mode.description%",
+                        "enum": [
+                          "replace"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "argument",
+                      "mode"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "command": {
+                        "type": "string",
+                        "description": "%toolbar.action.command.description%"
+                      },
+                      "argument": {
+                        "description": "%toolbar.action.command.argument.description%",
+                        "anyOf": [
+                          {
+                            "type": "object"
+                          },
+                          {
+                            "type": "array"
+                          },
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "mode": {
+                        "type": "string",
+                        "description": "%toolbar.action.mode.description%",
+                        "enum": [
+                          "command"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "command",
+                      "mode"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "argument": {
+                        "type": "string",
+                        "description": "%toolbar.action.run.argument.description%"
+                      },
+                      "mode": {
+                        "type": "string",
+                        "description": "%toolbar.action.mode.description%",
+                        "enum": [
+                          "run"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "argument",
+                      "mode"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "toolbar.toolboxs": {
+          "type": "array",
+          "markdownDescription": "%toolbar.toolboxs.markdownDescription%",
+          "items": {
+            "type": "object",
+            "description": "%toolbar.toolboxs.description%",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "%toolbar.toolbox.name.description%"
+              },
+              "layers": {
+                "type": "array",
+                "description": "%toolbar.toolboxs.layers.description%",
+                "items": {
+                  "type": "object",
+                  "description": "%toolbar.toolboxs.layers.description%",
+                  "properties": {
+                    "icon": {
+                      "type": "string",
+                      "default": "tools",
+                      "description": "%toolbar.tool.icon.description%"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "%toolbar.layer.name.description%"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "%toolbar.tool.description.description%"
+                    },
+                    "activate": {
+                      "description": "%toolbar.activate.description%",
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "description": "%toolbar.activate.object.description%",
+                          "properties": {
+                            "languages": {
+                              "type": "array",
+                              "description": "%toolbar.activate.languages.description%",
+                              "items": {
+                                "type": "string",
+                                "description": "%toolbar.activate.language.description%"
+                              }
+                            },
+                            "hover": {
+                              "type": "boolean",
+                              "description": "%toolbar.activate.hover.description%"
+                            }
+                          },
+                          "required": [
+                            "languages"
+                          ]
+                        },
+                        {
+                          "type": "boolean",
+                          "description": "%toolbar.activate.boolean.description%"
+                        }
+                      ]
+                    },
+                    "tools": {
+                      "type": "array",
+                      "description": "%toolbar.tools.description%",
+                      "items": {
+                        "type": "object",
+                        "description": "%toolbar.tools.description%",
+                        "properties": {
+                          "icon": {
+                            "type": "string",
+                            "default": "wrench",
+                            "description": "%toolbar.tool.icon.description%"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "%toolbar.tool.name.description%"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "%toolbar.tool.description.description%"
+                          },
+                          "actions": {
+                            "type": "array",
+                            "description": "%toolbar.actions.description%",
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "description": "%toolbar.action.string.description%"
+                                },
+                                {
+                                  "allOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "description": "%toolbar.action.name.description%"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "anyOf": [
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "argument": {
+                                              "description": "%toolbar.action.replace.argument.description%",
+                                              "anyOf": [
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "start": {
+                                                      "type": "string",
+                                                      "description": "%toolbar.action.argument.start.description%"
+                                                    },
+                                                    "self": {
+                                                      "description": "%toolbar.action.argument.self.description%",
+                                                      "anyOf":[
+                                                        {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "regex": {
+                                                              "type": "string",
+                                                              "description": "%toolbar.action.argument.regex.description%"
+                                                            },
+                                                            "with": {
+                                                              "type": "string",
+                                                              "description": "%toolbar.action.argument.with.description%"
+                                                            }
+                                                          },
+                                                          "required": [
+                                                            "regex",
+                                                            "with"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "type":"string",
+                                                          "description": "%toolbar.action.replace.string.description%"
+                                                        }
+                                                      ]
+                                                    },
+                                                    "end": {
+                                                      "type": "string",
+                                                      "description": "%toolbar.action.argument.end.description%"
+                                                    }
+                                                  }
+                                                },
+                                                {
+                                                  "type": "string",
+                                                  "description": "%toolbar.action.replace.string.description%"
+                                                }
+                                              ]
+                                            },
+                                            "mode": {
+                                              "type": "string",
+                                              "description": "%toolbar.action.mode.description%",
+                                              "enum": [
+                                                "replace"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "argument",
+                                            "mode"
+                                          ]
+                                        },
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "command": {
+                                              "type": "string",
+                                              "description": "%toolbar.action.command.description%"
+                                            },
+                                            "argument": {
+                                              "description": "%toolbar.action.command.argument.description%",
+                                              "anyOf": [
+                                                {
+                                                  "type": "object"
+                                                },
+                                                {
+                                                  "type": "array"
+                                                },
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "number"
+                                                },
+                                                {
+                                                  "type": "boolean"
+                                                }
+                                              ]
+                                            },
+                                            "mode": {
+                                              "type": "string",
+                                              "description": "%toolbar.action.mode.description%",
+                                              "enum": [
+                                                "command"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "command",
+                                            "mode"
+                                          ]
+                                        },
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "argument": {
+                                              "type": "string",
+                                              "description": "%toolbar.action.run.argument.description%"
+                                            },
+                                            "mode": {
+                                              "type": "string",
+                                              "description": "%toolbar.action.mode.description%",
+                                              "enum": [
+                                                "run"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "argument",
+                                            "mode"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "activate": {
+                            "description": "%toolbar.activate.description%",
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "description": "%toolbar.activate.object.description%",
+                                "properties": {
+                                  "languages": {
+                                    "type": "array",
+                                    "description": "%toolbar.activate.languages.description%",
+                                    "items": {
+                                      "type": "string",
+                                      "description": "%toolbar.activate.language.description%"
+                                    }
+                                  },
+                                  "hover": {
+                                    "type": "boolean",
+                                    "description": "%toolbar.activate.hover.description%"
+                                  }
+                                },
+                                "required": [
+                                  "languages"
+                                ]
+                              },
+                              {
+                                "type": "boolean",
+                                "description": "%toolbar.activate.boolean.description%"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "actions"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "tools"
+                  ]
+                }
+              },
+              "view": {
+                "type": "string",
+                "description": "%toolbar.toolbox.view.description%",
+                "enum": [
+                  "markdown",
+                  "mercury",
+                  "venus",
+                  "terra",
+                  "mars",
+                  "jupiter",
+                  "saturn",
+                  "uranus",
+                  "neptune"
+                ]
+              },
+              "activate": {
+                "description": "%toolbar.activate.description%",
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "description": "%toolbar.activate.object.description%",
+                    "properties": {
+                      "languages": {
+                        "type": "array",
+                        "description": "%toolbar.activate.languages.description%",
+                        "items": {
+                          "type": "string",
+                          "description": "%toolbar.activate.language.description%"
+                        }
+                      },
+                      "hover": {
+                        "type": "boolean",
+                        "description": "%toolbar.activate.hover.description%"
+                      }
+                    },
+                    "required": [
+                      "languages"
+                    ]
+                  },
+                  {
+                    "type": "boolean",
+                    "description": "%toolbar.activate.boolean.description%"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "layers",
+              "view",
+              "activate"
+            ]
+          },
+          "default": [
+            {
+              "_comment": "Need <Markdown Table> by Takumi Ishii; <Markdown Table Maker> by hellorusk",
+              "name": "Markdown Table Box",
+              "view": "markdown",
+              "activate": {
+                "hover": false,
+                "languages": [
+                  "markdown"
+                ]
+              },
+              "layers": [
+                {
+                  "name": "Cell",
+                  "icon": "primitive-square",
+                  "tools": [
+                    {
+                      "name": "Previous Cell",
+                      "icon":"arrow-circle-left",
+                      "actions": [
+                        "markdowntable.nextCell"
+                      ]
+                    },
+                    {
+                      "name": "Next Cell",
+                      "icon":"arrow-circle-right",
+                      "actions": [
+                        "markdowntable.prevCell"
+                      ]
+                    },
+                    {
+                      "name": "Create Table",
+                      "icon":"symbol-number",
+                      "actions": [
+                        "tablemaker.make"
+                      ]
+                    },
+                    {
+                      "name": "CSV To Table",
+                      "icon": "project",
+                      "actions": [
+                        "markdowntable.csvToTable"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Column",
+                  "icon": "split-horizontal",
+                  "tools": [
+                    {
+                      "name": "Move Left",
+                      "icon":"arrow-small-left",
+                      "actions": [
+                        "markdowntable.moveLeft"
+                      ]
+                    },
+                    {
+                      "name": "Move Right",
+                      "icon":"arrow-small-right",
+                      "actions": [
+                        "markdowntable.moveRight"
+                      ]
+                    },
+                    {
+                      "name": "Insert Left",
+                      "icon":"chevron-left",
+                      "actions": [
+                        "markdowntable.insertLeft"
+                      ]
+                    },
+                    {
+                      "name": "Insert Right",
+                      "icon":"chevron-right",
+                      "actions": [
+                        "markdowntable.insertRight"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Formatting",
+                  "icon": "layout",
+                  "tools": [
+                    {
+                      "name": "Align Left",
+                      "icon":"debug-reverse-continue",
+                      "actions": [
+                        "markdowntable.alignLeft"
+                      ]
+                    },
+                    {
+                      "name": "Align Right",
+                      "icon": "debug-continue",
+                      "actions": [
+                        "markdowntable.alignCenter"
+                      ]
+                    },
+                    {
+                      "name": "Align Center",
+                      "icon":"debug-pause",
+                      "actions": [
+                        "markdowntable.alignRight"
+                      ]
+                    },
+                    {
+                      "name": "Format",
+                      "icon": "jersey",
+                      "actions": [
+                        "markdowntable.format"
+                      ]
+                    }
+                    
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "copy-codicon": "mkdir media\\@vscode\\codicons\\ && cp -r node_modules\\@vscode\\codicons\\dist media\\@vscode\\codicons\\",
+    "generate-schema": "node ./scripts/generate_schema.cjs",
+    "copy-locales":"node ./scripts/copy_localization.cjs",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test-vscode-test": "vscode-test",
+    "test": "pnpm run compile && pnpm run test-node && pnpm run test-web",
+		"test-node": "node ./dist/test/runTest.js",
+		"test-web": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=./dist/test/suite/index-web"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.6",
+    "@types/webpack-env": "^1.18.4",
+    "@types/assert": "^1.5.10",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.84.0",
+    "@types/vscode-webview": "^1.57.4",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "@vscode/codicons": "0.0.35",
+    "@vscode/test-web": "^0.0.49",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.54.0",
+    "fast-typescript-to-jsonschema": "^0.0.9",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "mocha": "^10.2.0",
+    "assert": "^2.1.0",
+    "process": "^0.11.10",
+    "glob": "^10.3.10"
+  },
+  "dependencies": {
+    "@vscode/webview-ui-toolkit": "^1.4.0"
+  }
+}

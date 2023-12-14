@@ -1,0 +1,158 @@
+/*
+版权属于：dingzhenhua
+本文链接：https://www.dcmickey.cn/default/138.html
+*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+
+p {
+    margin: 100px;
+}
+
+.tip {
+    display: inline-block;
+    position: relative;
+}
+
+.tip:before, .tip:after {
+    opacity: 0; /*透明度为完全透明*/
+    position: absolute;
+    z-index: -1000; /*设为最上层*/
+    /*鼠标放上元素上时的动画，鼠标放上后效果在.tip-*:hover:before, .tip-*:hover:after中设置;
+    0.3s:规定完成过渡效果需要多少秒或毫秒,ease:规定慢速开始，然后变快，然后慢速结束的过渡效果*/
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    transition: 0.3s ease;
+
+}
+
+.tip:before {
+    content: '';
+    border: 6px solid transparent;
+}
+
+.tip:after {
+    content: attr(description); /*后去要提示的文本*/
+    padding: 5px;
+    white-space: nowrap; /*强制不换行*/
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.tip:hover:before, .tip:hover:after {
+    opacity: 1; /*鼠标放上时透明度为完全显示*/
+    z-index: 1000;
+}
+
+/*top*/
+.tip-top:before {
+    bottom: 100%;
+    left: 50%;
+    border-top-color: rgba(0, 0, 0, 0.8); /*小三角效果*/
+    margin-left: -3px;
+    margin-bottom: -12px;
+}
+
+.tip-top:after {
+    bottom: 100%;
+    left: 50%;
+    margin-left: -6px;
+}
+
+.tip-top:hover:before {
+    margin-bottom: -6px;
+}
+
+.tip-top:hover:after {
+    margin-bottom: 6px;
+}
+
+/*bottom*/
+.tip-bottom:before {
+    top: 100%;
+    left: 50%;
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+    margin-left: -3px;
+    margin-top: -9px;
+}
+
+.tip-bottom:after {
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    margin-top: 3px;
+}
+
+.tip-bottom:hover:before {
+    margin-top: -3px;
+}
+
+.tip-bottom:hover:after {
+    margin-top: 9px;
+}
+
+/*right*/
+.tip-right:before {
+    top: 50%;
+    left: 100%;
+    border-right-color: rgba(0, 0, 0, 0.8);
+    margin-left: -9px;
+    margin-top: -3px;
+}
+
+.tip-right:after {
+    top: 50%;
+    left: 100%;
+    margin-left: 3px;
+    margin-top: -6px;
+}
+
+.tip-right:hover:before {
+    margin-left: -3px;
+}
+
+.tip-right:hover:after {
+    margin-left: 9px;
+}
+
+/*left*/
+.tip-left:before {
+    top: 50%;
+    left: 0%;
+    border-left-color: rgba(0, 0, 0, 0.8);
+    margin-left: 0px;
+    margin-top: -3px;
+}
+
+.tip-left:after {
+    top: 50%;
+    right: 100%;
+    margin-right: 0px;
+    margin-top: -6px;
+}
+
+.tip-left:hover:before {
+    margin-left: -6px;
+}
+
+.tip-left:hover:after {
+    margin-right: 6px;
+}
+
+.hidden {
+    display: none;
+}
+
+.footer {
+    position: fixed;
+    width: 100%;
+    right: 2%;
+    bottom: 2%;
+    display:flex; 
+    justify-content:flex-end;
+    text-align:right;
+}
