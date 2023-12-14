@@ -1,7 +1,12 @@
 .vscode/**
 .vscode-test/**
+.vscode-test-web/**
 node_modules/**
 src/**
+out/**
+dist/test/**
+dist/**/*.map
+scripts/**
 .gitignore
 .yarnrc
 .npmrc
