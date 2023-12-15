@@ -17,6 +17,7 @@
   - [依赖](#依赖)
   - [设置](#设置)
   - [已知问题](#已知问题)
+  - [Todo List](#todo-list)
   - [自定义工具箱](#自定义工具箱)
     - [最基础的工具箱](#最基础的工具箱)
     - [工具箱](#工具箱)
@@ -52,7 +53,7 @@
 
 ### 内置Markdown工具箱
 
-内置了2个工具箱，42种Markdown处理工具。
+内置了2个工具箱，38种Markdown处理工具。
 
 ![工具箱](./image/markdown_toolbox.zh-cn.png)
 
@@ -96,6 +97,11 @@
 ## 已知问题
 
 暂无
+
+## Todo List
+
+- [ ] Add custom button in status bar
+- [ ] Add custom button in editor menu
 
 ## 自定义工具箱
 

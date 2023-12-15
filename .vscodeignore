@@ -4,6 +4,7 @@
 node_modules/**
 src/**
 out/**
+docs/**
 dist/test/**
 dist/**/*.map
 scripts/**

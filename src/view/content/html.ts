@@ -57,11 +57,11 @@ function iconToCodiconStyle(name:string ,icon:string|undefined):string {
         : text;
 }
 
-export function toolHtml(tool: Tool): HtmlInfo {
+export function toolHtml(tool: Tool,tipStyple: string): HtmlInfo {
     const name = tool.id;
     const description = tool.description ? tool.description : tool.name;
     const html = /*html*/ `
-        <vscode-button id="${name}" class="tip tip-bottom" appearance=${(tool.icon) ? "icon" : "secondary"} aria-label="${tool.name}" description="${description}">
+        <vscode-button id="${name}" class="tip ${tipStyple}" appearance=${(tool.icon) ? "icon" : "secondary"} aria-label="${tool.name}" description="${description}">
             ${iconToCodiconStyle(tool.name,tool.icon)}
         </vscode-button>`;
 
@@ -76,25 +76,32 @@ export function toolHtml(tool: Tool): HtmlInfo {
 }
 
 export function toolboxLayerHtml(toolboxLayer: ToolboxLayer, language: string): HtmlInfo & {footer:string} {
-    const afterFilter = toolboxLayer.tools.filter(tool => checkActivated(tool.activate, language)).map(tool => toolHtml(tool));
+    const afterFilter = toolboxLayer.tools.filter(tool => checkActivated(tool.activate, language))
+    const infos: HtmlInfo[] = [];
+    for (let i = 0; i < afterFilter.length; i++){
+        //const tipStyle = (i < afterFilter.length / 2) ? "tip-right" : "tip-left";
+        const info = toolHtml(afterFilter[i], "tip-bottom");
+        infos.push(info);
+    }
     const name = toolboxLayer.id;
     const description = toolboxLayer.description ? toolboxLayer.description : toolboxLayer.name;
     const iconHtml = iconToCodiconStyle(toolboxLayer.name, toolboxLayer.icon);
     const html = /*html*/`
-        <div id="${name}">
+        <div id="${name}" class="toolbar-layer">
+            <span>&#x23D0;</span>
             <vscode-button id="${name}-off" class="tip tip-right"  appearance=${(toolboxLayer.icon) ? "icon" : "secondary"} aria-label="${toolboxLayer.name}" description="${description}">
                 ${iconHtml}
             </vscode-button>
-            <span>&nbsp;&#166;&nbsp;</span>
-            ${afterFilter.map(_info => _info.html).join("\n")}
+            <span class="codicon">&#x00A6;</span>
+            ${infos.map(_info => _info.html).join("\n")}
         </div>`;
     const footer = /*html*/`
         <vscode-button id="${name}-on"  class="hidden tip tip-top"   appearance=${(toolboxLayer.icon) ? "icon" : "secondary"} aria-label="${toolboxLayer.name}" description="${description}">
             ${iconHtml}
         </vscode-button>`;
-    const script = `${afterFilter.map(_info => _info.script).join("\n")} 
+    const script = `${infos.map(_info => _info.script).join("\n")} 
         function on_${name}_on_click(){ 
-            document.getElementById('${name}').style.display = 'block'; 
+            document.getElementById('${name}').style.display = 'inline-block'; 
             document.getElementById('${name}-on').style.display = 'none'; 
         }
         function on_${name}_off_click(){ 
@@ -102,7 +109,7 @@ export function toolboxLayerHtml(toolboxLayer: ToolboxLayer, language: string): 
             document.getElementById('${name}-on').style.display = 'inline-block'; 
         }
         `;
-    const pairs = `${afterFilter.map(_info => _info.pairs).join(",\n")},
+    const pairs = `${infos.map(_info => _info.pairs).join(",\n")},
         {"id":"${name}-on","onclick":on_${name}_on_click},
         {"id":"${name}-off","onclick":on_${name}_off_click}
         `;

@@ -17,6 +17,7 @@
   - [Requirements](#requirements)
   - [Extension Settings](#extension-settings)
   - [Known Issues](#known-issues)
+  - [Todo List](#todo-list)
   - [Custom Toolbox](#custom-toolbox)
     - [Basic Toolbox](#basic-toolbox)
     - [Toolbox](#toolbox)
@@ -52,7 +53,7 @@ Tutorials and examples for customizing toolbars: [At the end of the article](#cu
 
 ### Built-in Markdown Toolbox
 
-The extension provide the built-in toolboxes, containing 42 tools for dealing markdown text.
+The extension provide the built-in toolboxes, containing 38 tools for dealing markdown text.
 
 ![Toolboxes](./docs/image/markdown_toolbox.png)
 
@@ -97,6 +98,11 @@ You can *optionally* install the following plugins, as some features in the buil
 
 haven't
 
+## Todo List
+
+- [ ] Add custom button in status bar
+- [ ] Add custom button in editor menu
+
 ## Custom Toolbox
 
 This extension toolbox is designed with four levels:
@@ -134,13 +140,13 @@ Copy the following content to the settings file:
 ],
 ```
 
-Then click on the "View -> Open View -> Mars Toolbar" button on the top of VSCode, and you will see a button appear on the side bar.  
-  
-The action defined for this tool is to execute the VSCode command: `workbench.extensions.action.openExtensionsFolder`, which means to open the extensions folder.  
-  
-### Toolbox  
-  
-In the settings file, the toolbox list is defined by `"toolbar.toolboxs"`.  
+Then click on the "View -> Open View -> Mars Toolbar" button on the top of VSCode, and you will see a button appear on the side bar.
+
+The action defined for this tool is to execute the VSCode command: `workbench.extensions.action.openExtensionsFolder`, which means to open the extensions folder.
+
+### Toolbox
+
+In the settings file, the toolbox list is defined by `"toolbar.toolboxs"`.
 
 ```jsonc
 "toolbar.toolboxs": [ // This is the list of toolboxes, where each object in the list represents a toolbox.  

@@ -156,3 +156,15 @@ p {
     justify-content:flex-end;
     text-align:right;
 }
+
+.toolbar-layer {
+    display: inline-block;
+}
+
+::-webkit-scrollbar{
+    width: 3px;
+    height: 3px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: transparent;
+}
