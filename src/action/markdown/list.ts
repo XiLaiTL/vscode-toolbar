@@ -55,7 +55,7 @@ function findListRange(editor: vscode.TextEditor, startLine: number): ListRange 
     const selfLength = getTabLength(editor, startLine);
     const allLine = editor.document.lineCount-1;
     //const tabLength: { [line: number]: number } = {};
-    const minList:number[] = [];
+    let minList:number[] = [];
     let aboveLine = startLine;
     for (aboveLine = startLine; aboveLine >= 1; aboveLine--){
         const aboveLength = getTabLength(editor, aboveLine);
@@ -73,6 +73,11 @@ function findListRange(editor: vscode.TextEditor, startLine: number): ListRange 
     }
     belowLine--;
     minList.sort();
+    if (aboveLine >= belowLine) { // when meet blank line
+        aboveLine = startLine;
+        belowLine = startLine;
+        minList = [startLine];
+    }
     return [aboveLine, belowLine, { indent: selfLength, minList }];
 }
 
@@ -94,7 +99,14 @@ function findOutsideLine(editor: vscode.TextEditor, startLine: number, endLine: 
 
 export async function toggleList(order:boolean) {
     const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
-    if (!editor || !editor.selection) { return; }
+    if (!editor||!editor.selection) { return; }
+    let targetType:ListType = getUnorderListType();
+    if (order) {
+        targetType = getOrderListType();
+    }
+    else {
+        
+    }    
     let startLine: number, endLine: number;
     let minList: number[] = [];
     let indent = Number.MAX_VALUE;
@@ -105,14 +117,7 @@ export async function toggleList(order:boolean) {
         [startLine, endLine] = [editor.selection.start.line, editor.selection.end.line];
         ({ indent, minList } = findOutsideLine(editor,startLine, endLine));
     }
-    //assert order === false;
-    let targetType:ListType = getUnorderListType();
-    if (order) {
-        targetType = getOrderListType();
-    }
-    else {
-        
-    }
+    
     let toggleOn = true;
     await editor.edit((editBuilder: vscode.TextEditorEdit) => {
         let i = 1;
