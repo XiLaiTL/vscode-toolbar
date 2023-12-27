@@ -103,9 +103,10 @@ haven't
 - [ ] Add custom button in status bar
 - [ ] Add custom button in editor menu, [like this which change the package.json to modify](https://github.com/LiangruLiu/VSCode-Extension/blob/customize-toolbar)
 - [ ] Add preview in hover tooltip
-- [ ] Add input and output command, input can transfer to next action
+- [ ] Add input and output command, input can transfer to next action ( or collect as context)
   if a function has more than one params and more than one result, it can just turn to be combination of input and output. like: `(selectionText, input1, input2)=>{ return [replaceholder,output1,output2] }`
 - [ ] Add list view for changing buttons
+- [ ] Split the replace action into 3 commands: togglePrefix, toggleSuffix and replace. And change action into vscode object `{"when":"","command":"", "args":{}}`. Change the `activate` into `{"postion":[]}` and `activate.language` into [`when` clause context](https://code.visualstudio.com/api/references/when-clause-contexts).
 
 ## Custom Toolbox
 
