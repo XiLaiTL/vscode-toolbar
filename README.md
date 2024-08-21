@@ -120,7 +120,8 @@ This extension toolbox is designed with four levels:
 
 ### Basic Toolbox
 
-Copy the following content to the settings file:
+There are two options:
+1. Copy the following content to the `settings.json` file:
 
 ```json
 "toolbar.toolboxs": [
@@ -144,6 +145,10 @@ Copy the following content to the settings file:
   }
 ],
 ```
+2. Go to Settings -> Extensions -> Toolbar -> Toolbar:Toolboxs and hit `Edit in settings.json`. In this case, the `Markdown Table Box` code will automatically be inserted in addition to the `My Box` code.
+
+![359906724-bccd8397-a071-4a33-8a40-d6b66d9c679e](https://github.com/user-attachments/assets/1bae5dbd-a35f-4c19-878d-f6722be90a66)
+
 
 Then click on the "View -> Open View -> Mars Toolbar" button on the top of VSCode, and you will see a button appear on the side bar.
 
@@ -197,6 +202,35 @@ Activation status is used in toolboxes, toolbox layers, and tools. The value tha
 }
 
 ```
+
+### Tooltip
+
+To make the tooltip appear when working with code in one or another language, the user should perform the following sequence of actions:
+1. The main first step to determine under which languages the tooltip will appear at all is to go to **Settings -> Extensions -> Toolbar -> Hover:Languages** and add the desired `Language ID`, for example `markdown`, `json`, `jsonc`, `javascript` etc .
+2. The second step to control the presence of a particular toolbox in the tooltip when working with the corresponding language is to insert or modify the following code in the `settings.json` file when defining the appropriate toolbox.
+```
+      "activate": {
+        "languages": ["markdown"],
+        "hover": false // whether to display in the tooltip (true) or not (false)
+      }
+```
+If there are many languages, then it is necessary to insert them all into the "activate" field.
+
+E.g. `toolbar.hover.languages`(**Settings -> Extensions -> Toolbar -> Hover:Languages**) is set to ["markdown", "json", "jsonc", "javascript"]. If the user wants the tooltip for the `MyBox` toolbox appears only in the `json`, `jsonc` files, then they need to add the following lines into the `settings.json` when defining `MyBox`.
+```
+      "activate": {
+        "languages": ["markdown","javascript"],
+        "hover": false
+      }
+```
+or
+```
+      "activate": {
+        "languages": ["json","jsonc"],
+        "hover": true
+      }
+```
+In this case, both statements are equal.
 
 ### Toolbar
 
