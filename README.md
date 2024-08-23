@@ -15,6 +15,7 @@
       - [Markdown Toolbox](#markdown-toolbox)
       - [Markdown Table Toolbox (denpendent on other extensions)](#markdown-table-toolbox-denpendent-on-other-extensions)
   - [Requirements](#requirements)
+    - [Suggestions](#suggestions)
   - [Extension Settings](#extension-settings)
   - [Known Issues](#known-issues)
   - [Todo List](#todo-list)
@@ -83,6 +84,10 @@ You can *optionally* install the following plugins, as some features in the buil
 - [Markdown All in One](vscode:extension/yzhang.markdown-all-in-one) : Provides list header indentation and table of contents creation features.
 - [Markdown Table](vscode:extension/TakumiI.markdowntable) : Enables Markdown Table toolbox for table creation and formatting.
 - [Markdown Table Maker](vscode:extension/hellorusk.markdown-table-maker) : Adds table creation functionality to the Markdown Table toolbox.
+
+### Suggestions
+
+- [macros](vscode:extension/ctf0.macros) : You can customize the command by combine the existed commands.  
 
 ## Extension Settings
 

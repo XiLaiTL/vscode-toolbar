@@ -20,6 +20,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	vscode.commands.executeCommand('setContext', 'ext.hoverLanguages', getConfig("hover.languages",["markdown"]));
 	registerHovers(context, getConfig("hover.languages"));
+
+	//TODO: 这里都没有加入subscriptions
 	onConfigChange("hover.languages", (newValue: []) => {
 		vscode.commands.executeCommand('setContext', 'ext.hoverLanguages', newValue);
 	});
