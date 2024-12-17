@@ -19,7 +19,7 @@
     "url": "https://github.com/XiLaiTL/vscode-toolbar.git"
   },
   "engines": {
-    "vscode": "^1.84.0"
+    "vscode": "^1.82.0"
   },
   "l10n": "./locales",
   "categories": [
@@ -84,6 +84,13 @@
           "type": "webview",
           "contextualTitle": "Markdown Toolbar",
           "icon": "$(markdown)"
+        },
+        {
+          "id": "toolbar.latex-toolbar",
+          "name": "Latex Toolbar",
+          "type": "webview",
+          "contextualTitle": "Latex Toolbar",
+          "icon": "$(pencil)"
         },
         {
           "id": "toolbar.mercury-toolbar",
@@ -171,6 +178,11 @@
           "enum": ["1)","1."],
           "default":"1."
         },
+        "toolbar.builtin.latex.activate":{
+          "type": "boolean",
+          "markdownDescription": "%toolbar.builtin.latex.activate.latexDescription%",
+          "default": true
+        },
         "toolbar.panel.languages": {
           "type": "array",
           "items": {
@@ -178,7 +190,7 @@
           },
           "markdownDescription": "%toolbar.panel.languages.markdownDescription%",
           "default": [
-            "markdown"
+            "markdown","latex"
           ]
         },
         "toolbar.hover.languages": {
@@ -188,7 +200,7 @@
           },
           "markdownDescription": "%toolbar.hover.languages.markdownDescription%",
           "default": [
-            "markdown"
+            "markdown","latex"
           ]
         },
         "toolbar.actions": {
@@ -815,7 +827,7 @@
     "@types/webpack-env": "^1.18.4",
     "@types/assert": "^1.5.10",
     "@types/node": "18.x",
-    "@types/vscode": "^1.84.0",
+    "@types/vscode": "^1.82.0",
     "@types/vscode-webview": "^1.57.4",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",

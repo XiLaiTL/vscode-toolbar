@@ -8,6 +8,10 @@ export const registers = {
             id: "toolbar.markdown-toolbar",
             title: "Markdown Toolbar",
         },
+        latex: {
+            id: "toolbar.latex-toolbar",
+            title: "Latex Toolbar",
+        },
         mercury: {
             id: "toolbar.mercury-toolbar",
             title: "Mercury Toolbar",

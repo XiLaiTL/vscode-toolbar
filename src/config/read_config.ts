@@ -5,6 +5,7 @@ import { Toolbox, clearToolboxs, toolboxs } from "../model/toolbox";
 import { BigMap } from "../utilities/big_map";
 import { views } from "../view/view";
 import { getConfig } from "./configuration";
+import { latexToolbox } from "./latex_config";
 import { markdownToolbox } from "./markdown_config";
 import * as vscode from 'vscode';
 
@@ -29,6 +30,9 @@ export function readToolboxs(configToolboxs?: []): void {
     clearToolboxs();
     if (getConfig("builtin.markdown.activate",Boolean(true))) {
         readToolbox(markdownToolbox);
+    }
+    if (getConfig("builtin.latex.activate",Boolean(true))) {
+        readToolbox(latexToolbox);
     }
     readMarkdownToolAction();
     const customToolboxs = configToolboxs ? configToolboxs : getConfig("toolboxs", [{}]);

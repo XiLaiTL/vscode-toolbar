@@ -41,6 +41,12 @@ export function activate(context: vscode.ExtensionContext) {
 		ToolbarPanel.refresh(context.extensionUri);
 	});
 
+	onConfigChange("builtin.latex.activate", () => {
+		readToolboxs();
+		refreshViews();
+		ToolbarPanel.refresh(context.extensionUri);
+	});
+
 	onConfigChange("toolboxs", (newValue:[]) => {
 		readToolboxs(newValue);
 		refreshViews();

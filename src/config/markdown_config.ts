@@ -31,7 +31,7 @@ export const markdownToolbox: Toolbox =
                 {
                     "name": vscode.l10n.t("Toggle Strikethrough"),
                     "actions": ["Markdown: Toggle Strikethrough"],
-                    "icon": "$S",
+                    "icon": "$̶S̶",
                     "description": vscode.l10n.t("Toggle strikethrough for selected text"),
                     "activate": true
                 },
