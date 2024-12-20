@@ -7,10 +7,41 @@
     padding: 0px;
 }
 
-vscode-panels {
-    overflow-x: hidden;
+body{
+    padding: 0px !important;
 }
 
+vscode-panels {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-bottom: 2em;
+}
+
+.horizon-line{
+    position: relative;
+    width: 1em;
+}
+.horizon-line::before {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 10%;
+    height: 150%;
+    border-left: 1px solid rgb(113, 113, 113);
+}
+
+.horizon-line-dashed{
+    position: relative;
+    width: 1em;
+}
+.horizon-line-dashed::before {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 10%;
+    height: 150%;
+    border-left: 1px dashed rgb(113, 113, 113);
+}
 
 p {
     margin: 100px;
@@ -41,7 +72,8 @@ p {
 .tip:after {
     content: attr(description); /*后去要提示的文本*/
     padding: 5px;
-    white-space: nowrap; /*强制不换行*/
+    /*white-space: nowrap; 强制不换行*/
+    min-width: 8em;
     background-color: #000000;
     color: #ffffff;
 }
@@ -74,6 +106,29 @@ p {
     margin-bottom: 6px;
 }
 
+/*top-left*/
+.tip-top-left:before {
+    bottom: 100%;
+    right: 50%;
+    border-top-color: rgba(0, 0, 0, 0.8); /*小三角效果*/
+    margin-right: -3px;
+    margin-bottom: -12px;
+}
+
+.tip-top-left:after {
+    bottom: 100%;
+    right: 50%;
+    margin-right: -6px;
+}
+
+.tip-top-left:hover:before {
+    margin-bottom: -6px;
+}
+
+.tip-top-left:hover:after {
+    margin-bottom: 6px;
+}
+
 /*bottom*/
 .tip-bottom:before {
     top: 100%;
@@ -97,6 +152,31 @@ p {
 .tip-bottom:hover:after {
     margin-top: 9px;
 }
+
+/*bottom-left*/
+.tip-bottom-left:before {
+    top: 100%;
+    right: 50%;
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+    margin-right: -3px;
+    margin-top: -9px;
+}
+
+.tip-bottom-left:after {
+    top: 100%;
+    right: 50%;
+    margin-right: -6px;
+    margin-top: 3px;
+}
+
+.tip-bottom-left:hover:before {
+    margin-top: -3px;
+}
+
+.tip-bottom-left:hover:after {
+    margin-top: 9px;
+}
+
 
 /*right*/
 .tip-right:before {

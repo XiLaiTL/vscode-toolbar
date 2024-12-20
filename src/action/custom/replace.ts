@@ -21,7 +21,15 @@ export async function replace(argus: string|ReplaceActionArgument) {
     const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
     if (!editor) { return; }
     const range = getSelectionRange(editor);
-    if (!range) { return; }
+    if (!range) {
+        if (typeof argus === "string") {
+            await editor.insertSnippet(new vscode.SnippetString(argus));
+        }
+        else {
+            await editor.insertSnippet(new vscode.SnippetString(`${argus.start??""}${argus.self??""}\$0${argus.end??""}`))
+        }
+        return;
+    }
     
     if (typeof argus === "string") {
         await editor.edit((editBuilder) => {

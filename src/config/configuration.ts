@@ -40,11 +40,17 @@ export function getConfig<T>(key: string, defaultValue?: T):T {
     return value;
 }
 
-export function onConfigChange<T>(key:string,callback:(newValue:T)=>void) {
-    vscode.workspace.onDidChangeConfiguration((eventNames)=>{
+export function saveConfig<T>(key: string,value:T):Thenable<void> {
+    let configuration = vscode.workspace.getConfiguration(PREFIXCONFIG);
+    return configuration.update(key, value, vscode.ConfigurationTarget.Global);
+}
+
+export function onConfigChange<T>(context:vscode.ExtensionContext,key:string,callback:(newValue:T)=>void) {
+    const disposale = vscode.workspace.onDidChangeConfiguration((eventNames) => {
         if(eventNames.affectsConfiguration(`${PREFIXCONFIG}.${key}`)) {
             let newValue:T = getConfig(key) as T;
             callback(newValue);
         }   
     });
+    context.subscriptions.push(disposale);
 }

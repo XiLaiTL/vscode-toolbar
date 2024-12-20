@@ -4,12 +4,14 @@ import { CommandAction, runCommand } from "./custom/command";
 import { RunAction } from "./custom/run";
 import { markdownActions } from "./markdown/markdown_action";
 import { registers } from "../config/id";
+import { insert, InsertAction } from "./custom/insert";
+import { block, BlockAction } from "./custom/block";
 
 export const actions: { [key: string]: () => Promise<void> } = {};
 
 export type Action = {
     name?: string,
-} & ( ReplaceAction | CommandAction | RunAction );
+} & ( ReplaceAction | CommandAction | RunAction | InsertAction | BlockAction );
 
 export function registerActions(context: vscode.ExtensionContext) {
     const toggleCommandHandler = async (name: string) => {
@@ -49,6 +51,14 @@ export function deserializeAction(action: Action|string): () => Promise<void>  {
             case "replace": {
                 const actionRe = action as ReplaceAction;
                 await replace(actionRe.argument);
+            } break;
+            case "insert": {
+                const actionInsert = action as InsertAction;
+                await insert(actionInsert.argument);
+            } break;
+            case "block": {
+                const actionBlock = action as BlockAction;
+                await block(actionBlock.argument);
             } break;
             case "run": {
                 const actionRe = action as RunAction;

@@ -634,6 +634,7 @@
                 "description": "%toolbar.toolbox.view.description%",
                 "enum": [
                   "markdown",
+                  "latex",
                   "mercury",
                   "venus",
                   "terra",

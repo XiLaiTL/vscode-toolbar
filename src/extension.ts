@@ -8,9 +8,6 @@ import { ToolbarPanel, registerPanel } from './view/panel';
 import { refreshViews, registerViews } from './view/view';
 import { registerHovers } from './view/hover';
 
-
-
-
 export function activate(context: vscode.ExtensionContext) {
 	readActions();
 	readToolboxs();
@@ -22,41 +19,42 @@ export function activate(context: vscode.ExtensionContext) {
 	registerHovers(context, getConfig("hover.languages"));
 
 	//TODO: 这里都没有加入subscriptions
-	onConfigChange("hover.languages", (newValue: []) => {
+	onConfigChange(context,"hover.languages", (newValue: []) => {
 		vscode.commands.executeCommand('setContext', 'ext.hoverLanguages', newValue);
 	});
 	vscode.commands.executeCommand('setContext', 'ext.panelLanguages', getConfig("panel.languages",["markdown"]));
-	onConfigChange("panel.languages", (newValue: []) => {
+	onConfigChange(context,"panel.languages", (newValue: []) => {
 		vscode.commands.executeCommand('setContext', 'ext.panelLanguages', newValue);
 	});
 
-	onConfigChange("actions", (newValue: []) => {
+	onConfigChange(context,"actions", (newValue: []) => {
 		readActions(newValue);
 	});
 
 
-	onConfigChange("builtin.markdown.activate", () => {
+	onConfigChange(context,"builtin.markdown.activate", () => {
 		readToolboxs();
 		refreshViews();
 		ToolbarPanel.refresh(context.extensionUri);
 	});
 
-	onConfigChange("builtin.latex.activate", () => {
+	onConfigChange(context,"builtin.latex.activate", () => {
 		readToolboxs();
 		refreshViews();
 		ToolbarPanel.refresh(context.extensionUri);
 	});
 
-	onConfigChange("toolboxs", (newValue:[]) => {
+	onConfigChange(context,"toolboxs", (newValue:[]) => {
 		readToolboxs(newValue);
 		refreshViews();
 		ToolbarPanel.refresh(context.extensionUri);
 	});
 
-	vscode.window.onDidChangeActiveTextEditor((editor) => {
+	context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor((editor) => {
 		refreshViews();
 		ToolbarPanel.refresh(context.extensionUri);
-	});
+	}));
+	
 }
 
 export function deactivate() {}

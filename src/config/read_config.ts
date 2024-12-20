@@ -1,4 +1,5 @@
 import { deserializeAction, actions, Action } from "../action/action";
+import { readLatexToolAction } from "../action/latex/latex_action";
 import { readMarkdownToolAction } from "../action/markdown/markdown_action";
 import { Tool } from "../model/tool";
 import { Toolbox, clearToolboxs, toolboxs } from "../model/toolbox";
@@ -31,10 +32,11 @@ export function readToolboxs(configToolboxs?: []): void {
     if (getConfig("builtin.markdown.activate",Boolean(true))) {
         readToolbox(markdownToolbox);
     }
+    readMarkdownToolAction();
     if (getConfig("builtin.latex.activate",Boolean(true))) {
         readToolbox(latexToolbox);
     }
-    readMarkdownToolAction();
+    readLatexToolAction();
     const customToolboxs = configToolboxs ? configToolboxs : getConfig("toolboxs", [{}]);
     for (const custom of customToolboxs) {
         try {
