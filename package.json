@@ -2,7 +2,7 @@
   "name": "vscode-toolbar",
   "displayName": "%toolbar.displayName%",
   "description": "%toolbar.description%",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "XiLaiTL",
   "author": {
     "name": "XiLaiTL",
@@ -28,6 +28,10 @@
   ],
   "keywords": [
     "markdown",
+    "tex",
+    "latex",
+    "beamer",
+    "util",
     "button",
     "toolbar",
     "tool",
@@ -39,7 +43,9 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onLanguage:markdown"
+    "onLanguage:markdown",
+    "onLanguage:tex",
+    "onLanguage:latex"
   ],
   "main": "./dist/extension-node",
 	"browser": "./dist/extension-web",

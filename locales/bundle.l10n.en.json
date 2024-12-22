@@ -36,6 +36,6 @@
   "toolbar.builtin.markdown.unorderListStyle.markdownDescription": "Set the style of the built-in Markdown toolbox's unordered list, optional values are `-`, `+` and `*`; default value is `+`",
   "toolbar.builtin.markdown.orderListStyle.markdownDescription": "Set the style of the built-in Markdown toolbox's ordered list, optional values are `1)` and `1.`; default value is `1.`",
   "toolbar.builtin.latex.activate.latexDescription": "Whether to activate the built-in Latex toolbox",
-  "toolbar.description": "Add custom buttons instead of commands. Markdown toolbar is built-in. ",
+  "toolbar.description": "Add custom buttons instead of commands. Markdown and LaTeX toolbars are built-in. ",
   "toolbar.displayName": "Toolbar"
 }
