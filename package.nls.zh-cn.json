@@ -89,7 +89,7 @@
   "toolbar.builtin.markdown.unorderListStyle.markdownDescription": "设置内置Markdown工具箱无序列表的样式，可选值是`-`,`+`,`*`，默认值是`+`",
   "toolbar.builtin.markdown.orderListStyle.markdownDescription": "设置内置Markdown工具箱有序列表的样式，可选值是`1)`和`1.`，默认值是`1.`",
   "toolbar.builtin.latex.activate.latexDescription": "是否激活内置的Latex工具箱",
-  "toolbar.description": "自定义按钮、自定义工具栏。内置Markdown工具栏。",
+  "toolbar.description": "自定义按钮、自定义工具栏。内置Markdown和Latex工具栏。",
   "toolbar.displayName": "工具栏",
   "Latex Toolbox": "Latex工具箱"
 }

@@ -48,13 +48,25 @@ interface HtmlInfo{
 }
 
 const ICON_TEXT = /^\$/;
-function iconToCodiconStyle(name:string ,icon:string|undefined):string {
+const ICON_SUBSCRIPT = /^#(.+)\{(.+)\}$/;
+const ICON_SVG = /^<svg.+<\/svg>$/;
+
+function iconToCodiconStyle(name: string, icon: string | undefined): string {
+    const matches = icon?.match(ICON_SUBSCRIPT);
+    if (matches) {
+        if (ICON_SVG.test(matches[2])) {
+            return /*html*/`${matches[2]}`;
+        }
+        return /*html*/`<span class="codicon subscript" subscript=${matches[2]}>${matches[1]}</span>`
+    }
     const text
         = (!icon) ? name
         : (ICON_TEXT.test(icon)) ? icon.replace(ICON_TEXT, "")
         : "";
+    const icon_css = (!text) ? `codicon codicon-${icon}` : "codicon codicon-";
+    const icon_text_css = text ? "icon-text" : "";
     return (icon)
-        ?/*html*/`<span class="codicon codicon-${icon}">${text}</span>`
+        ?/*html*/`<span class="${icon_text_css} ${icon_css}">${text}</span>`
         : text;
 }
 
@@ -77,7 +89,7 @@ export function toolHtml(tool: Tool,tipStyple: string): HtmlInfo {
 }
 
 export function toolboxLayerHtml(index: number, toolboxLayer: ToolboxLayer, language: string): HtmlInfo & {footer:string} {
-    const afterFilter = toolboxLayer.tools.filter(tool => checkActivated(tool.activate, language))
+    const afterFilter = toolboxLayer.tools.filter(tool => checkActivated(tool.activate, language));
     const infos: HtmlInfo[] = [];
     for (let i = 0; i < afterFilter.length; i++){
         const tipStyle = `tip${index < 2 ? "-bottom" : "-top"}${(i < 3) ? "" : "-left"}`;

@@ -9,8 +9,17 @@ const SPACE = '&nbsp;&nbsp;';
 const SEPARATOR = `${SPACE}|${SPACE}`;
 const CODE_DEFINE = '```';
 const ICON_TEXT = /^\$/;
+const ICON_SUBSCRIPT = /^#(.+)\{(.+)\}$/;
+const ICON_SVG = /^<svg.+<\/svg>$/;
 
 export function iconToVsCodeStyle(name: string, icon: string | undefined) {
+    const matches = icon?.match(ICON_SUBSCRIPT);
+    if (matches) { 
+        if (ICON_SVG.test(matches[2])) {
+            return matches[1];
+        }
+        return icon?.replace(ICON_SUBSCRIPT, "$1:$2");
+    }
     return (!icon) ? name
         : (ICON_TEXT.test(icon)) ? icon.replace(ICON_TEXT, "")
         : `$(${icon})`;

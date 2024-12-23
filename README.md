@@ -1,4 +1,4 @@
-# toolbar README
+# toolbar (BUILT-IN LaTeX and Markdown Toolbar)
 
 >Until a day, I no longer wanted to remember those complicated keyboard shortcuts. With one hand on the mouse, the remaining hand on the keyboard was not enough for me to press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
 
@@ -8,7 +8,7 @@
 
 <details> <summary> Catalog </summary>
 
-- [toolbar README](#toolbar-readme)
+- [toolbar (BUILT-IN LaTeX and Markdown Toolbar)](#toolbar-built-in-latex-and-markdown-toolbar)
   - [Features](#features)
     - [Provide Highly Customizable Toolboxes, Toolbars and Tools](#provide-highly-customizable-toolboxes-toolbars-and-tools)
     - [Built-in Markdown Toolbox](#built-in-markdown-toolbox)
@@ -23,6 +23,7 @@
     - [Basic Toolbox](#basic-toolbox)
     - [Toolbox](#toolbox)
     - [Activation Status](#activation-status)
+    - [Tooltip](#tooltip)
     - [Toolbar](#toolbar)
     - [Tool](#tool)
     - [Action](#action)

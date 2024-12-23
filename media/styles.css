@@ -251,3 +251,25 @@ p {
 ::-webkit-scrollbar-thumb{
     background-color: transparent;
 }
+
+.subscript{
+    position: relative;
+    top: -0.125em;
+    left:-0.5em;
+}
+
+.subscript:after{
+    content: attr(subscript);
+    font-size: 0.7em;
+    vertical-align: baseline;
+    position: absolute;
+    bottom: -0.4em;
+    left: 60%; 
+    margin-left: 0.1em;
+    white-space: nowrap; 
+}
+
+.icon-text{
+    position: relative;
+    top: -0.125em;
+}

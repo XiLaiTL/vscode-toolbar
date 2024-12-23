@@ -89,7 +89,7 @@ export const latexToolbox: Toolbox =
                     "activate": true
                 },
                 {
-                    "name": "Toggle Frame",
+                    "name": vscode.l10n.t("Toggle Frame"),
                     "actions": [{
                         "mode": "block",
                         "argument": {
@@ -234,13 +234,6 @@ export const latexToolbox: Toolbox =
                     "icon": "$🅄",
                     "description": vscode.l10n.t("Toggle undeline for selected text"),
                     "activate": true
-                },
-                {
-                    "name": vscode.l10n.t("Toggle Math Span"),
-                    "actions": ["Markdown: Toggle Math Span"],
-                    "icon": "$ξ",
-                    "description": vscode.l10n.t("Toggle math span style for selected text"),
-                    "activate": true
                 }
             ],
         },
@@ -310,7 +303,7 @@ export const latexToolbox: Toolbox =
                             "end":"}"
                         }
                     }],
-                    "icon": "$χ",
+                    "icon": `#χ{<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.875ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 807.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title"><title id="MathJax-SVG-1-Title">CALIGRAPHIC X.</title><defs aria-hidden="true"><path stroke-width="1" id="E1-MJCAL-58" d="M324 614Q291 576 250 573Q231 573 231 584Q231 589 232 592Q235 601 244 614T271 643T324 671T400 683H403Q462 683 481 610Q485 594 490 545T498 454L501 413Q504 413 551 442T648 509T705 561Q707 565 707 578Q707 610 682 614Q667 614 667 626Q667 641 695 662T755 683Q765 683 775 680T796 662T807 623Q807 596 792 572T713 499T530 376L505 361V356Q508 346 511 278T524 148T557 75Q569 69 580 69Q585 69 593 77Q624 108 660 110Q667 110 670 110T676 106T678 94Q668 59 624 30T510 0Q487 0 471 9T445 32T430 71T422 117T417 173Q416 183 416 188Q413 214 411 244T407 286T405 299Q403 299 344 263T223 182T154 122Q152 118 152 105Q152 69 180 69Q183 69 187 66T191 60L192 58V56Q192 41 163 21T105 0Q94 0 84 3T63 21T52 60Q52 77 56 90T85 131T155 191Q197 223 259 263T362 327T402 352L391 489Q391 492 390 505T387 526T384 547T379 568T372 586T361 602T348 611Q346 612 341 613T333 614H324Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true"><use href="#E1-MJCAL-58" x="0" y="0"></use></g></svg>}`,
                     "description": vscode.l10n.t("Toggle Calligraphy for selected text"),
                     "activate": true
                 },
@@ -346,15 +339,41 @@ export const latexToolbox: Toolbox =
                 {
                     "name": vscode.l10n.t("Toggle Math Span"),
                     "actions": ["Markdown: Toggle Math Span"],
-                    "icon": "$ξ",
+                    "icon": "#F{$}",
                     "description": vscode.l10n.t("Toggle math span style for selected text"),
                     "activate": true
                 },
                 {
                     "name": vscode.l10n.t("Toggle Math Block"),
                     "actions": ["Markdown: Toggle Math Block"],
-                    "icon": "symbol-operator",
+                    "icon": "#F{$$}",
                     "description": vscode.l10n.t("Toggle math block style for selected block"),
+                    "activate": true
+                },
+                {
+                    "name": vscode.l10n.t("Toggle Align Block"),
+                    "actions": [{
+                        "mode": "block",
+                        "argument": {
+                            "start": "\\begin{align}",
+                            "end": "\\end{align}"
+                        }
+                    }],
+                    "icon": "#F{al}",
+                    "description": vscode.l10n.t("Toggle Align Block"),
+                    "activate": true
+                },
+                {
+                    "name": vscode.l10n.t("Toggle Equation Block"),
+                    "actions": [{
+                        "mode": "block",
+                        "argument": {
+                            "start": "\\begin{equation}",
+                            "end": "\\end{equation}"
+                        }
+                    }],
+                    "icon": "#F{eq}",
+                    "description": vscode.l10n.t("Toggle Equation Block"),
                     "activate": true
                 },
                 {
