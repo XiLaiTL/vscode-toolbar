@@ -10,6 +10,7 @@ export const latexToolbox: Toolbox =
         "hover": true,
     },
     "layers": [
+
         {
             "name": "Custom",
             "icon": "account",
@@ -43,9 +44,23 @@ export const latexToolbox: Toolbox =
 
         },
         {
-            "name": vscode.l10n.t("Header"),
-            "icon": "$H",
+            "name": vscode.l10n.t("Blocks"),
+            "icon": "symbol-unit",
+            "activate": true,
             "tools": [
+                {
+                    "name": vscode.l10n.t("Part"),
+                    "actions":[{
+                        "mode": "replace",
+                        "argument": {
+                            "start": "\\part{",
+                            "end":"}"
+                        }
+                    }],
+                    "icon": "layout-panel",
+                    "description": vscode.l10n.t("Part"),
+                    "activate": true
+                },
                 {
                     "name": vscode.l10n.t("Chapter"),
                     "actions":[{
@@ -59,6 +74,41 @@ export const latexToolbox: Toolbox =
                     "description": vscode.l10n.t("Chapter"),
                     "activate": true
                 },
+                {
+                    "name": vscode.l10n.t("Toggle Order List"),
+                    "actions": ["Latex: Toggle Order List"],
+                    "icon": "list-ordered",
+                    "description": vscode.l10n.t("Toggle Order List"),
+                    "activate": true
+                },
+                {
+                    "name": vscode.l10n.t("Toggle Unorder List"),
+                    "actions": ["Latex: Toggle Unorder List"],
+                    "icon": "list-unordered",
+                    "description": vscode.l10n.t("Toggle Unorder List"),
+                    "activate": true
+                },
+                {
+                    "name": "Toggle Frame",
+                    "actions": [{
+                        "mode": "block",
+                        "argument": {
+                            "start": "\\begin{frame}",
+                            "label": "\\frametitle{}",
+                            "end": "\\end{frame}"
+                        }
+                    }],
+                    "icon": "note",
+                    "description": vscode.l10n.t("Toggle Frame"),
+                    "activate": true
+                }
+            ]
+        },
+        {
+            "name": vscode.l10n.t("Header"),
+            "icon": "$H",
+            "tools": [
+                
                 {
                     "name": vscode.l10n.t("Section"),
                     "actions":[{
@@ -99,18 +149,33 @@ export const latexToolbox: Toolbox =
                     "activate": true
                 },
                 {
-                    "name": vscode.l10n.t("Sub Sub Sub Section"),
+                    "name": vscode.l10n.t("Paragraph"),
                     "actions":[{
                         "mode": "replace",
                         "argument": {
-                            "start": "\\subsubsubsection{",
+                            "start": "\\paragraph{",
                             "end":"}"
                         }
                     }],
-                    "icon": "$④",
-                    "description": vscode.l10n.t("Sub Sub Sub Section"),
+                    "icon": "browser",
+                    "description": vscode.l10n.t("Paragraph"),
                     "activate": true
                 },
+                {
+                    "name": vscode.l10n.t("Sub Paragraph"),
+                    "actions":[{
+                        "mode": "replace",
+                        "argument": {
+                            "start": "\\subparagraph{",
+                            "end":"}"
+                        }
+                    }],
+                    "icon": "layout-menubar",
+                    "description": vscode.l10n.t("Sub Paragraph"),
+                    "activate": true
+                },
+                
+
                 // {
                 //     "name": vscode.l10n.t("Increase Header Level"),
                 //     "actions": ["Markdown: Increase Header Level"],
@@ -140,7 +205,7 @@ export const latexToolbox: Toolbox =
                             "end":"}"
                         }
                     }],
-                    "icon": "bold",
+                    "icon": "$🄱",
                     "description": vscode.l10n.t("Toggle bold for selected text"),
                     "activate": true
                 },
@@ -153,7 +218,7 @@ export const latexToolbox: Toolbox =
                             "end":"}"
                         }
                     }],
-                    "icon": "italic",
+                    "icon": "$🄸",
                     "description": vscode.l10n.t("Toggle italic for selected text"),
                     "activate": true
                 },
@@ -166,7 +231,7 @@ export const latexToolbox: Toolbox =
                             "end":"}"
                         }
                     }],
-                    "icon": "$U̲",
+                    "icon": "$🅄",
                     "description": vscode.l10n.t("Toggle undeline for selected text"),
                     "activate": true
                 },
@@ -178,56 +243,6 @@ export const latexToolbox: Toolbox =
                     "activate": true
                 }
             ],
-        },
-        {
-            "name": "Formula",
-            "icon": "$α",
-            "tools": [
-                {
-                    "name": "Open Math Preview",
-                    "actions": [{
-                        "mode": "command",
-                        "command": "latex-workshop.toggleMathPreviewPanel",
-                    }],
-                    "icon": "preview",
-                    "description": "Open Math Preview",
-                    "activate": true
-                },
-                {
-                    "name": vscode.l10n.t("Toggle Math Span"),
-                    "actions": ["Markdown: Toggle Math Span"],
-                    "icon": "$ξ",
-                    "description": vscode.l10n.t("Toggle math span style for selected text"),
-                    "activate": true
-                },
-                {
-                    "name": vscode.l10n.t("Toggle Math Block"),
-                    "actions": ["Markdown: Toggle Math Block"],
-                    "icon": "symbol-operator",
-                    "description": vscode.l10n.t("Toggle math block style for selected block"),
-                    "activate": true
-                },
-                {
-                    "name": "Clipboard Image to latex",
-                    "actions": [{
-                        "mode": "command",
-                        "command": "latex-pix.paste-latex-from-clipboard"
-                    }],
-                    "icon": "output",
-                    "description": "Paste the image to latex",
-                    "activate": true
-                },
-                {
-                    "name": "Image to latex",
-                    "actions": [{
-                        "mode": "command",
-                        "command": "latex-pix.paste-latex-from-open-path"
-                    }],
-                    "icon": "file-symlink-file",
-                    "description": "Open a photo to convert it",
-                    "activate": true
-                },
-            ]
         },
         {
             "name": "Font Formatting",
@@ -315,9 +330,62 @@ export const latexToolbox: Toolbox =
             ]
         },
         {
+            "name": "Formula",
+            "icon": "$α",
+            "tools": [
+                {
+                    "name": "Open Math Preview",
+                    "actions": [{
+                        "mode": "command",
+                        "command": "latex-workshop.toggleMathPreviewPanel",
+                    }],
+                    "icon": "preview",
+                    "description": "Open Math Preview",
+                    "activate": true
+                },
+                {
+                    "name": vscode.l10n.t("Toggle Math Span"),
+                    "actions": ["Markdown: Toggle Math Span"],
+                    "icon": "$ξ",
+                    "description": vscode.l10n.t("Toggle math span style for selected text"),
+                    "activate": true
+                },
+                {
+                    "name": vscode.l10n.t("Toggle Math Block"),
+                    "actions": ["Markdown: Toggle Math Block"],
+                    "icon": "symbol-operator",
+                    "description": vscode.l10n.t("Toggle math block style for selected block"),
+                    "activate": true
+                },
+                {
+                    "name": "Clipboard Image to latex",
+                    "actions": [{
+                        "mode": "command",
+                        "command": "latex-pix.paste-latex-from-clipboard"
+                    }],
+                    "icon": "output",
+                    "description": "Paste the image to latex",
+                    "activate": true
+                },
+                {
+                    "name": "Image to latex",
+                    "actions": [{
+                        "mode": "command",
+                        "command": "latex-pix.paste-latex-from-open-path"
+                    }],
+                    "icon": "file-symlink-file",
+                    "description": "Open a photo to convert it",
+                    "activate": true
+                },
+            ]
+        },
+        {
             "name": vscode.l10n.t("Text Blank"),
             "icon": "$__",
-            "activate": true,
+            "activate": {
+                "hover": false,
+                "languages":["latex"]
+            },
             "tools": [
                 {
                     "name": vscode.l10n.t("Indent"),
@@ -359,41 +427,6 @@ export const latexToolbox: Toolbox =
                     "description":vscode.l10n.t("Circle"),
                     "activate": true,
                 },
-            ]
-        },
-        {
-            "name": vscode.l10n.t("Blocks"),
-            "icon": "symbol-unit",
-            "activate": true,
-            "tools": [
-                {
-                    "name": vscode.l10n.t("Toggle Order List"),
-                    "actions": ["Latex: Toggle Order List"],
-                    "icon": "list-ordered",
-                    "description": vscode.l10n.t("Toggle Order List"),
-                    "activate": true
-                },
-                {
-                    "name": vscode.l10n.t("Toggle Unorder List"),
-                    "actions": ["Latex: Toggle Unorder List"],
-                    "icon": "list-unordered",
-                    "description": vscode.l10n.t("Toggle Unorder List"),
-                    "activate": true
-                },
-                {
-                    "name": "Toggle Frame",
-                    "actions": [{
-                        "mode": "block",
-                        "argument": {
-                            "start": "\\begin{frame}",
-                            "label": "\\frametitle{}",
-                            "end": "\\end{frame}"
-                        }
-                    }],
-                    "icon": "debug-restart-frame",
-                    "description": vscode.l10n.t("Toggle Frame"),
-                    "activate": true
-                }
             ]
         }
     ]

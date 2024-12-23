@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { registers } from "../config/id";
 import { viewHtmlContent } from "./content/html";
+import { usefulEditor } from "../utilities/active_editor";
 
 export const views: {
     [key: string]: {
@@ -44,7 +45,7 @@ class ToolbarViewProvider implements vscode.WebviewViewProvider {
 			]
         };
         webviewView.title = this._title;
-        const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+        const editor: vscode.TextEditor | undefined = usefulEditor;
         const language = editor ? editor.document.languageId : "markdown";
         webviewView.webview.html = viewHtmlContent(webviewView.webview,this._extensionUri,this._viewKey,language);
         webviewView.webview.onDidReceiveMessage((message) => {
@@ -55,7 +56,7 @@ class ToolbarViewProvider implements vscode.WebviewViewProvider {
     }
     refresh() {
         if (this._view) {
-            const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+            const editor: vscode.TextEditor | undefined = usefulEditor;
             const language = editor ? editor.document.languageId : "markdown";
             this._view.webview.html = viewHtmlContent(this._view.webview,this._extensionUri,this._viewKey,language); 
         }

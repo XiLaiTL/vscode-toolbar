@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
+import { usefulEditor } from '../../utilities/active_editor';
 
 export async function changeHeaderSize(increase: Boolean): Promise<void> {
-	const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+	const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor || !editor.selection) { return; }
     // Get current line from current selection or current word
     const line: number = editor.selection.start.line;

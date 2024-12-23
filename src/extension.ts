@@ -7,6 +7,7 @@ import { registerActions } from './action/action';
 import { ToolbarPanel, registerPanel } from './view/panel';
 import { refreshViews, registerViews } from './view/view';
 import { registerHovers } from './view/hover';
+import { registerEditor, usefulEditor } from './utilities/active_editor';
 
 export function activate(context: vscode.ExtensionContext) {
 	readActions();
@@ -50,11 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
 		ToolbarPanel.refresh(context.extensionUri);
 	});
 
-	context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor((editor) => {
-		refreshViews();
-		ToolbarPanel.refresh(context.extensionUri);
-	}));
-	
+	registerEditor(context);
 }
 
 export function deactivate() {}

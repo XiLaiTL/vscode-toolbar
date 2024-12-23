@@ -4,6 +4,7 @@ import { ToolboxLayer } from "../../model/layer";
 import { Toolbox } from "../../model/toolbox";
 import * as vscode from 'vscode';
 import { Tool } from "../../model/tool";
+import { usefulEditor } from "../../utilities/active_editor";
 
 export async function addTool(tool:Tool) {
     const toolboxs = getConfig<Toolbox[]>("toolboxs", []);
@@ -49,7 +50,7 @@ export async function addTool(tool:Tool) {
 }
 
 export async function addInsertTool() {
-    const editor = vscode.window.activeTextEditor;
+    const editor = usefulEditor;
     let content: string | undefined = undefined;
     if (!editor) {
         content = await vscode.window.showInputBox({prompt:"The content you need to insert", title: "The content you need to insert" });

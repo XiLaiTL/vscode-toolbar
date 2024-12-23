@@ -1,8 +1,9 @@
 import * as vscode from 'vscode';
 import { checkLineChars } from '../text_utils';
+import { usefulEditor } from '../../utilities/active_editor';
 
 export async function toggleBlockList(chars: string): Promise<void>{
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor||!editor.selection) { return; }
     const startLine: number = editor.selection.start.line;
     const endLine: number = editor.selection.end.line;

@@ -1,8 +1,9 @@
 import * as vscode from 'vscode';
 import { insertSnippet } from '../text_utils';
+import { usefulEditor } from '../../utilities/active_editor';
 
 export async function toggleDivider(middle: string, start: string, end: string) {
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor||!editor.selection) { return; }
     if (editor.selection.start.isEqual(editor.selection.end)) {
         const addEnter = (editor.selection.start.character === 0) ? "" : "\n";

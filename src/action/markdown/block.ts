@@ -1,8 +1,9 @@
 import * as vscode from 'vscode';
 import { checkLineChars, insertSnippet } from '../text_utils';
+import { usefulEditor } from '../../utilities/active_editor';
 
 export async function toggleBlockContainer(startChars: string,endChars:string,tip:string): Promise<void>{
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor) { return; }
     if (!editor.selection||editor.selection.start.isEqual(editor.selection.end)) {
         await insertSnippet(`\n${startChars}${tip}\n${endChars}\n`);

@@ -1,10 +1,11 @@
 import * as vscode from 'vscode';
 import { getSelectionRange, insertSnippet } from '../text_utils';
 import { checkUrl } from '../../utilities/url_utils';
+import { usefulEditor } from '../../utilities/active_editor';
 
 //the position of link set to $1
 export async function insertLinkSnippet(snippet: string, replaceholder:string[]) { 
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor) { return; }
     const range = getSelectionRange(editor);
     const selected = (range)? editor.document.getText(range) : "";
@@ -24,7 +25,7 @@ export async function insertLinkSnippet(snippet: string, replaceholder:string[])
 const linkRegex = /!?\[(.*?)\](?:\(.*?\)|\[.*?\])/g;
 const footnotesRegex = /\[\^(.*?)\]/g;
 export async function deleteLink() {
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor) { return; }
     const range = getSelectionRange(editor,"line");
     if (!range) { return; }
@@ -37,7 +38,7 @@ export async function deleteLink() {
 
 
 export async function insertFooter(snippet: string, footerSnippet: string, replaceholder: string[]) {
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor) { return; }
     const range = getSelectionRange(editor);
     const selected = (range) ? editor.document.getText(range) : "";
@@ -54,7 +55,7 @@ export async function insertFooter(snippet: string, footerSnippet: string, repla
 
 
 export async function insertPath() {
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor) { return; }
     const uris = await vscode.window.showOpenDialog({ canSelectFiles: true,  canSelectMany: false });
     if (uris && uris[0]) {

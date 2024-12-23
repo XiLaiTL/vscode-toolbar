@@ -8,10 +8,11 @@ import { Toolbox } from "../../model/toolbox";
 const SPACE = '&nbsp;&nbsp;';
 const SEPARATOR = `${SPACE}|${SPACE}`;
 const CODE_DEFINE = '```';
+const ICON_TEXT = /^\$/;
 
-export function iconToVsCodeStyle(name:string ,icon:string|undefined) {
+export function iconToVsCodeStyle(name: string, icon: string | undefined) {
     return (!icon) ? name
-        : (icon.includes("$")) ? icon.replaceAll("$", "")
+        : (ICON_TEXT.test(icon)) ? icon.replace(ICON_TEXT, "")
         : `$(${icon})`;
 }
 

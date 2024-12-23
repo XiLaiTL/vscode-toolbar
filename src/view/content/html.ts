@@ -47,10 +47,11 @@ interface HtmlInfo{
     pairs : string
 }
 
+const ICON_TEXT = /^\$/;
 function iconToCodiconStyle(name:string ,icon:string|undefined):string {
     const text
         = (!icon) ? name
-        : (icon.includes("$"))? icon.replaceAll("$", "")
+        : (ICON_TEXT.test(icon)) ? icon.replace(ICON_TEXT, "")
         : "";
     return (icon)
         ?/*html*/`<span class="codicon codicon-${icon}">${text}</span>`
@@ -136,6 +137,7 @@ export function toolboxHtml(toolbox:Toolbox, language:string):HtmlInfo {
         ${infos.map(_info => _info.footer).join("\n")}
     </div>
     `;
+
     return {
         html: infos.map(_info => _info.html).join("\n") +  footer,
         // /*html*/`
@@ -196,9 +198,10 @@ export function panelHtmlContent(webview: vscode.Webview, extensionUri: vscode.U
         /*html*/`
         <vscode-divider role="separator"></vscode-divider>
         `),
-        script: afterFilter.map(_info=>_info.script).join("\n"),
-        pairs: afterFilter.map(_info=>_info.pairs).join(",\n")
+        script: afterFilter.filter(_info=>_info.script!=="").map(_info=>_info.script).join("\n"),
+        pairs: afterFilter.filter(_info=>_info.pairs!=="").map(_info=>_info.pairs).join(",\n")
     };
+    
     const script = `
     var _buttons=[
         ${info.pairs}

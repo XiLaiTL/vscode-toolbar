@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { getConfig } from '../../config/configuration';
+import { usefulEditor } from '../../utilities/active_editor';
 
 const ListTypes = ["UnorderPlus", "UnorderAsterisk", "UnorderDash", "OrderDot", "OrderParen"];
 type ListType = "UnorderPlus"| "UnorderAsterisk"| "UnorderDash"| "OrderDot"| "OrderParen"|"Normal";
@@ -98,7 +99,7 @@ function findOutsideLine(editor: vscode.TextEditor, startLine: number, endLine: 
 }
 
 export async function toggleList(order:boolean) {
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor||!editor.selection) { return; }
     let targetType:ListType = getUnorderListType();
     if (order) {
@@ -200,7 +201,7 @@ function lineToList(editBuilder: vscode.TextEditorEdit,lineString:string, line: 
 
 
 export async function toggleCheckList() {
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor||!editor.selection) { return; }
     // if (editor.selection.start.isEqual(editor.selection.end)) {}
     const startLine: number = editor.selection.start.line;

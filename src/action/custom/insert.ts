@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { usefulEditor } from '../../utilities/active_editor';
 export type InsertAction = {
     argument: string,
     mode: "insert"
@@ -30,7 +31,7 @@ export async function insert(argument: string) {
         connect = input_map[key] + connect;
     }
     const res = connect.replace(new RegExp(connect_paren), replaced);
-    const editor = vscode.window.activeTextEditor;
+    const editor = usefulEditor;
     if (editor) {
         editor.insertSnippet(new vscode.SnippetString(res));
     }

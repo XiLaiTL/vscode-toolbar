@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { panelHtmlContent } from './content/html';
+import { usefulEditor } from '../utilities/active_editor';
 
 export function registerPanel(context: vscode.ExtensionContext,commandId:string,panelId:string,title:string) {
     let disposable = vscode.commands.registerCommand(commandId, () => {
@@ -73,7 +74,7 @@ export class ToolbarPanel {
     }
 
     private _getWebviewContent(webview: vscode.Webview, extensionUri: vscode.Uri):string {
-        const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+        const editor: vscode.TextEditor | undefined = usefulEditor;
         const language = editor ? editor.document.languageId : "markdown";
         return panelHtmlContent(webview, extensionUri, language);
     }

@@ -1,3 +1,4 @@
+import { usefulEditor } from "../../utilities/active_editor";
 import { checkForChars, getSelectionRange } from "../text_utils";
 import * as vscode from 'vscode';
 
@@ -18,7 +19,7 @@ export interface ReplaceActionArgument{
 }
 
 export async function replace(argus: string|ReplaceActionArgument) {
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if (!editor) { return; }
     const range = getSelectionRange(editor);
     if (!range) {

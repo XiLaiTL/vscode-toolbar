@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { getSelectionRange, insertSnippet, checkForChars } from '../text_utils';
+import { usefulEditor } from '../../utilities/active_editor';
 
 /*
 https://github.com/MarcusElg/MarkdownToolbar
@@ -30,7 +31,7 @@ SOFTWARE.
 
 // Toggles formatting for the current selection or current word
 export async function toggleFormatting(chars: string):Promise<void> {
-    const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
+    const editor: vscode.TextEditor | undefined = usefulEditor;
     if ( !editor ) { return; }
     const range = getSelectionRange(editor);
     if (!range) {
